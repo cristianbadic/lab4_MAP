@@ -29,7 +29,15 @@ public class Controller {
     }
 
 
-    //1
+    /**
+     *
+     * @param courseId the id of a course, in wich a student is supposed to be registered
+     * @param studentId the id of a student, supposed to be registered
+     * @throws DoesNotExistException, if there is no Student or
+     * Course object in their specific repositorys for the ids given as parameter
+     * @throws CanNotRegister if the course has reached its max enrollment number or
+     * the total credits of the student supposed to be registered, would exceed 30, if added
+     */
     public void register(long courseId, long studentId) throws DoesNotExistException, CanNotRegister {
         Student student = null;
         for(Student stud: studentsRep.getAll())
@@ -62,14 +70,13 @@ public class Controller {
 
 
 
-/**
- * search through the courses repository to find te courses with free places, witch are added to the free list
- * maxEnrolled variable, used to get the max nr. of enrollments for each curse in the repo
- * nrStudents, used to find the number of student enrolled for each specific course in the repo
- * @return list of courses
- */
-
-    //2
+    /**
+     *
+     * search through the course repository to find te courses with free places, witch are added to the free list
+     * maxEnrolled variable, used to get the max nr. of enrollments for each curse in the repo
+     * nrStudents, used to find the number of student enrolled for each specific course in the repo
+     * @return list of courses
+    */
     public List<Course> retrieveCoursesWithFreePlaces(){
         List<Course> free= new ArrayList<>();
         for (int index =0; index < this.coursesRep.getAll().size(); index ++){
@@ -82,7 +89,11 @@ public class Controller {
         return free;
     }
 
-    //3
+    /**
+     *
+     * @param courseId course id of the course, from witch the list of students should be returned
+     * @return the list of students for the specific course
+     */
     public List<Student> retrieveStudentsEnrolledForACourse(long courseId){
         List<Student> enrolledStud = new ArrayList<>();
         for (Student student: this.studentsRep.getAll()){
@@ -92,7 +103,6 @@ public class Controller {
         return enrolledStud;
     }
 
-    //4
     public List<Course> getAllCourses(){
         return this.coursesRep.getAll();
     }
@@ -101,7 +111,14 @@ public class Controller {
         return this.studentsRep.getAll();
     }
 
-    //5
+    /**
+     *deletes the course from the coursesRep, but also from the course list of each student or taecher, that contains it
+     * @param teacherId, the id of the teacher that wants to delete one of its courses
+     * @param courseId, the id of the course to be deleted
+     * @throws DoesNotExistException,if there is no Teacher or
+     * Student object in their specific repositorys for the ids given as parameter
+     * @throws TeacherException, if Teacher doesn't teach the course
+     */
     public void deleteCourse(long teacherId, long courseId) throws DoesNotExistException, TeacherException {
         Teacher teacher = null;
         for (Teacher teach : teachersRep.getAll())
@@ -138,7 +155,13 @@ public class Controller {
         this.coursesRep.delete(course);
     }
 
-    //6
+    /**
+     * adds a teacher to the teachersRep
+     * @param firstN, first name of the Teacher object, to be added to the teachersRep
+     * @param lastN, last name of the Teacher object, to be added to the teachersRep
+     * @param teachId, teacher ID of the Teacher object, to be added to the teachersRep
+     * @throws ExistentElementException, if there is already another object with the same id in the repo
+     */
     public void addTeacher(String firstN, String lastN, long teachId) throws ExistentElementException {
         Teacher teacher = null;
         for (Teacher teach : teachersRep.getAll())
@@ -153,7 +176,13 @@ public class Controller {
     }
 
 
-    //7
+    /**
+     *
+     * @param firstN, first name of the Student object, to be added to the studentsRep
+     * @param lastN, last name of the Student object, to be added to the studentsRep
+     * @param studId, student ID of the Student object, to be added to the studentsRep
+     * @throws ExistentElementException, if there is already another object with the same id in the repo
+     */
     public void addStudent(String firstN, String lastN, long studId) throws ExistentElementException {
         Student student = null;
         for(Student stud: studentsRep.getAll())
@@ -166,7 +195,16 @@ public class Controller {
         this.studentsRep.create(new Student(firstN, lastN,studId, 0, new ArrayList<>()));
     }
 
-    //8
+    /**
+     * adds a course Object to the courses repository, and also to the list of courses for the techer, that teaches the course
+     * @param cId
+     * @param nameC
+     * @param teacherId
+     * @param maxEnroll
+     * @param creditsNr
+     * @throws ExistentElementException, if there is already another object with the same id in the repo
+     * @throws DoesNotExistException, if the teacher that is supposed to teach the course, isn't in the teachersRepo
+     */
     public void addCourse(long cId, String nameC, long teacherId, int maxEnroll, int creditsNr) throws ExistentElementException, DoesNotExistException {
         Course course = null;
         for(Course co: coursesRep.getAll())
@@ -194,6 +232,9 @@ public class Controller {
     }
 
 
+    /**
+     * reads all 3 repositorys from the json files
+     */
     public void readAllFiles(){
         try {
             this.studentsRep.readJson();
@@ -214,6 +255,9 @@ public class Controller {
         }
     }
 
+    /**
+     * writes all 3 repositorys to the json files
+     */
     public void writeToAllFiles(){
         try {
             this.studentsRep.writeToJason();
@@ -235,23 +279,33 @@ public class Controller {
 
     }
 
-    //9
+    /**
+     * the repository of courses is sorted in ascending order by the number of enrolled students
+     */
     public void sortStudentCredits(){
         this.studentsRep.sortRep();
     }
 
-    //10
+    /**
+     * the repository of students is sorted in ascending order by the number of credits
+     */
     public void sortCourseNrStudents(){
         this.coursesRep.sortRep();
     }
 
-    //11
+    /**
+     *
+     * @return a list of students, that have more then 5 credits (are enrolled in at least a course)
+     */
     public List<Student> filterStudents(){
         List<Student> students = this.studentsRep.getAll();
         return students.stream().filter(stud->stud.getTotalCredits() >= 6).toList();
     }
 
-    //12
+    /**
+     *
+     * @return a list of courses, where more than 30 students can be enrolled
+     */
     public List<Course> filterCourse(){
         List<Course> courses = this.coursesRep.getAll();
         return courses.stream().filter(cour->cour.getMaxEnrollment() > 30).toList();

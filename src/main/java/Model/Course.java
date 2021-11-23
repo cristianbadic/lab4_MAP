@@ -94,6 +94,11 @@ public class Course {
                 '}';
     }
 
+    /**
+     * compares 2 courses by their number of enrolled Students
+     * @param course2 a course object with whom the current object is compared
+     * @return determines witch course has fewer students
+     */
     public int compareCourse(Course course2){
         return Integer.compare(this.getStudentsEnrolled().size(), course2.getStudentsEnrolled().size());
     }

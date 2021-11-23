@@ -20,8 +20,8 @@ public class TeacherRepository extends InMemoryRepository<Teacher> implements Fi
 
 
     /**
-     *updates the firstName and lastName of a teacher in the repoList with the attributes of a teacher given as parameter
-     * @param object
+     *updates the firstName and lastName and the courses of a teacher in the repoList with the attributes of a teacher given as parameter
+     * @param object teacher with new attributes
      * @return updated teacher
      */
     @Override
@@ -35,6 +35,11 @@ public class TeacherRepository extends InMemoryRepository<Teacher> implements Fi
         teacherToUpdate.setCourses(object.getCourses());
         return teacherToUpdate;
     }
+
+    /**
+     * reads the Teacher objects from a json file and adds them to the repoList
+     * @throws IOException if the reading was unsuccessful
+     */
     @Override
     public void readJson() throws IOException {
         Reader reader = new BufferedReader(new FileReader(fileName));
@@ -60,6 +65,10 @@ public class TeacherRepository extends InMemoryRepository<Teacher> implements Fi
         reader.close();
     }
 
+    /**
+     * writes all Teacher objects fro the repoList to a json
+     * @throws IOException if the writing to the file was unsuccessful
+     */
     @Override
     public void writeToJason() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();

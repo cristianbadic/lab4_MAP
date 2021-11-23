@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person{
@@ -40,7 +39,7 @@ public class Student extends Person{
     }
 
     /**
-     * adds a new course to the list enrolledCourses
+     * adds a new course to the list enrolledCourses, also the total number of Credits increases
      * @param course an element of type course
      */
     public void addCourses(Course course){
@@ -81,6 +80,11 @@ public class Student extends Person{
                 '}';
     }
 
+    /**
+     * compares 2 Students by their total number of credits
+     * @param student2 a student object with whom the current object is compared
+     * @return determines witch number of total credits is smaller
+     */
     public int compareStudent(Student student2){
         return Integer.compare(this.totalCredits, student2.getTotalCredits());
     }

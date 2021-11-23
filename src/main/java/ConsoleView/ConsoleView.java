@@ -18,6 +18,18 @@ public class ConsoleView {
         this.controller = controller;
     }
 
+    /**
+     * the option menu for the user
+     * before the user is able to choose an option, all the data from the json files is read
+     * after the menu is closed, all data is written to the json files
+     * the exceptions are thrown the same, as in the Controller
+     *
+     * @throws DoesNotExistException
+     * @throws TeacherException
+     * @throws ExistentElementException
+     * @throws IOException
+     * @throws CanNotRegister
+     */
     public void run() throws DoesNotExistException, TeacherException, ExistentElementException, IOException, CanNotRegister {
         Scanner scannerCV = new Scanner(System.in);
         boolean running = true;
@@ -71,7 +83,7 @@ public class ConsoleView {
             }
         }
         this.controller.writeToAllFiles();
-        System.out.println("The Application was closed !\s");
+        System.out.println("The menu is closed !\s");
 
     }
     public void CVMenu(){
@@ -92,6 +104,10 @@ public class ConsoleView {
                 """);
     }
 
+
+    /**
+     *  gets user input, to register
+     */
     public void registerCV() throws DoesNotExistException, CanNotRegister {
         Scanner scanner = new Scanner(System.in);
 
@@ -105,12 +121,18 @@ public class ConsoleView {
 
     }
 
+    /**
+    * shows all free courses
+     */
     public void retrieveFreeCourses(){
         for (Course course : this.controller.retrieveCoursesWithFreePlaces()){
             System.out.println(course);
         }
     }
 
+    /**
+    *the id of the student, for witch the courses will be showed is given by the user
+     */
     public void retrieveStudentsEnrolled(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Student id: ");
@@ -127,6 +149,9 @@ public class ConsoleView {
         }
     }
 
+    /**
+     *user input to delete a course
+     */
     public void deleteCo() throws DoesNotExistException, TeacherException {
         Scanner scanner = new Scanner(System.in);
 
@@ -141,9 +166,11 @@ public class ConsoleView {
 
     }
 
+    /**
+     *user input to add teacher
+     */
     public void addTe() throws ExistentElementException {
         Scanner scanner = new Scanner(System.in);
-        //scanner.nextLine();
         System.out.println("first Name: ");
         String firstN = scanner.nextLine();
 
@@ -159,7 +186,6 @@ public class ConsoleView {
 
     public void addSt() throws ExistentElementException {
         Scanner scanner = new Scanner(System.in);
-        //scanner.nextLine();
         System.out.println("first Name: ");
         String firstN = scanner.nextLine();
 
@@ -175,7 +201,6 @@ public class ConsoleView {
 
     public void addCo() throws DoesNotExistException, ExistentElementException {
         Scanner scanner = new Scanner(System.in);
-        //scanner.nextLine();
 
         System.out.println(" Course Name: ");
         String courseN = scanner.nextLine();

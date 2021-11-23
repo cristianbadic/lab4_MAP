@@ -22,7 +22,7 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
 
     /**
      *updates the firstName and lastName of a student in the repoList with the attributes of a student given as parameter
-     * @param object
+     * @param object teacher with new attributes
      * @return updated student
      */
     @Override
@@ -39,6 +39,10 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         return studentToUpdate;
     }
 
+    /**
+     * reads the Student objects from a json file and adds them to the repoList
+     * @throws IOException if the reading was unsuccessful
+     */
     @Override
     public void readJson() throws IOException {
         Reader reader = new BufferedReader(new FileReader(fileName));
@@ -65,6 +69,10 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         reader.close();
     }
 
+    /**
+     * writes all Student objects from the repoList to a json
+     * @throws IOException if the writing to the file was unsuccessful
+     */
     @Override
     public void writeToJason() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -75,6 +83,9 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
 
     }
 
+    /**
+     * sorts the Student repo in ascending order by the number of credits
+     */
     @Override
     public void sortRep(){
         this.repoList.sort(Student::compareStudent);

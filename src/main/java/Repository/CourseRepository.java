@@ -1,7 +1,6 @@
 package Repository;
 
 import Model.Course;
-import Model.Teacher;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CourseRepository extends InMemoryRepository<Course> implements FileRepository<Course>{
     private String fileName;
@@ -22,7 +20,7 @@ public class CourseRepository extends InMemoryRepository<Course> implements File
     /**
      *updates the name, teacher, number of Credits and maximum enrollment from a course
      * with the attributes of a course given as parameter
-     * @param object
+     * @param object teacher with new attributes
      * @return updated course
      */
     @Override
@@ -40,6 +38,10 @@ public class CourseRepository extends InMemoryRepository<Course> implements File
         return courseToUpdate;
     }
 
+    /**
+     * reads the Course objects from a json file and adds them to the repoList
+     * @throws IOException if the reading was unsuccessful
+     */
     @Override
     public void readJson() throws IOException {
         Reader reader = new BufferedReader(new FileReader(fileName));
@@ -67,6 +69,10 @@ public class CourseRepository extends InMemoryRepository<Course> implements File
         reader.close();
     }
 
+    /**
+     * writes all Course objects from the repoList to a json
+     * @throws IOException if the writing to the file was unsuccessful
+     */
     @Override
     public void writeToJason() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -76,6 +82,10 @@ public class CourseRepository extends InMemoryRepository<Course> implements File
         writer.writeValue(new File(this.fileName), this.repoList);
 
     }
+
+    /**
+     * sorts the Course repo in ascending order by the number of enrolled students
+     */
     @Override
     public void sortRep(){
         this.repoList.sort(Course::compareCourse);

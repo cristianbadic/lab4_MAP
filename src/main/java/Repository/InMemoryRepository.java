@@ -10,8 +10,6 @@ public abstract class InMemoryRepository<T> implements ICrudRepository<T> {
 
     public InMemoryRepository() {
         this.repoList = new ArrayList<>();
-
-
     }
 
     /**
