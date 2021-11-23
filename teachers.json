@@ -1,0 +1,21 @@
+[ {
+  "firstName" : "Daniel",
+  "lastName" : "Moldovan",
+  "teacherId" : 1,
+  "courses" : [ 1 ]
+}, {
+  "firstName" : "George",
+  "lastName" : "Bucur",
+  "teacherId" : 2,
+  "courses" : [ 2, 3 ]
+}, {
+  "firstName" : "Marian",
+  "lastName" : "Tudor",
+  "teacherId" : 3,
+  "courses" : [ 4 ]
+}, {
+  "firstName" : "Liviu",
+  "lastName" : "Maftei",
+  "teacherId" : 4,
+  "courses" : [ 5 ]
+} ]

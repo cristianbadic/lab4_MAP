@@ -1,0 +1,25 @@
+[ {
+  "firstName" : "Bill",
+  "lastName" : "Burr",
+  "studentId" : 1,
+  "totalCredits" : 16,
+  "enrolledCourses" : [ 2, 5 ]
+}, {
+  "firstName" : "Virgil",
+  "lastName" : "Balint",
+  "studentId" : 2,
+  "totalCredits" : 6,
+  "enrolledCourses" : [ 4 ]
+}, {
+  "firstName" : "Ioan",
+  "lastName" : "Stefan",
+  "studentId" : 3,
+  "totalCredits" : 0,
+  "enrolledCourses" : [ ]
+}, {
+  "firstName" : "Constantin",
+  "lastName" : "Dinescu",
+  "studentId" : 4,
+  "totalCredits" : 6,
+  "enrolledCourses" : [ 4 ]
+} ]

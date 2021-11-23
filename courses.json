@@ -1,0 +1,36 @@
+[ {
+  "courseId" : 1,
+  "name" : "Computer Science",
+  "teacher" : 1,
+  "maxEnrollment" : 30,
+  "credits" : 6,
+  "studentsEnrolled" : [ ]
+}, {
+  "courseId" : 2,
+  "name" : "English",
+  "teacher" : 2,
+  "maxEnrollment" : 31,
+  "credits" : 6,
+  "studentsEnrolled" : [ 1 ]
+}, {
+  "courseId" : 3,
+  "name" : "French",
+  "teacher" : 2,
+  "maxEnrollment" : 2,
+  "credits" : 9,
+  "studentsEnrolled" : [ ]
+}, {
+  "courseId" : 4,
+  "name" : "History",
+  "teacher" : 3,
+  "maxEnrollment" : 100,
+  "credits" : 6,
+  "studentsEnrolled" : [ 2, 4 ]
+}, {
+  "courseId" : 5,
+  "name" : "Spanish",
+  "teacher" : 4,
+  "maxEnrollment" : 3,
+  "credits" : 10,
+  "studentsEnrolled" : [ 1 ]
+} ]
